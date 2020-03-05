@@ -12,9 +12,11 @@ int main()
 	{
 		for (int i = 0; i < 10; i++)
 		{
-			cout << multiplyResult[i] << endl;
+			cout << multiplyResult[i];
 		}
 	}
+
+	cout << endl;
 
 	if (divide(2, 35, 100, 15, 35, 100, divideResult, 10))
 	{
