@@ -1,16 +1,9 @@
-//
-//  mantissa.cpp
-//  code review 2
-//
-//  Created by Morgan Robinson on 3/5/20.
-//  Copyright © 2020 Morgan Robinson. All rights reserved.
-//
 #include <iostream>
 #include <ctype.h>
 #include "mantissa.h"
 
 using namespace std;
-bool mantissa(char numString[], int& numerator, int& denominator);
+//bool mantissa(char numString[], int& numerator, int& denominator);
 
 bool mantissa(char numString[], int& numerator, int& denominator)
 {
@@ -20,24 +13,21 @@ bool mantissa(char numString[], int& numerator, int& denominator)
     denominator = 10;
     numerator = 0;
     
+    if(isValid(numString) == false)
+    {
+        return false;
+    }
+    
     
     //calculating the length of numString and position of decimal if there is one
     while(numString[length] != NULL)
     {
-        //returns false if any invalid character is found
-        if(isdigit(numString[length])== false && isspace(numString[length]) == false)
-        {
             if(numString[length] == '.')
             {
                 hasDecimal = true;
                 decimalPos = length;
             }
-            else if (numString[length] != '-' && numString[length] != '+')
-            {
-                return false;
-            }
-        }
-        
+            
         length++;
     }
    
@@ -47,14 +37,13 @@ bool mantissa(char numString[], int& numerator, int& denominator)
       return true;
     }
     
-    
     char nums[0];//array for all numbers after decimal point
-    int iterator = 0;
+    int iterator = 0;//will hold the length of nums[]
     
     //fills nums[]
     for (int i = decimalPos; i < length; i++)
     {
-        if(isdigit(numString[i]))
+        if(isDigit(numString[i]))
         {
             nums[iterator] = numString[i];
             iterator++;
@@ -68,7 +57,77 @@ bool mantissa(char numString[], int& numerator, int& denominator)
     }
     
     //turns nums[] into an int
-    numerator = atoi(nums);
+    numerator = makeInt(nums);
+    
 
     return true;
+}
+
+
+//Helper functions
+
+//checks if passed in numstring is valid entry
+bool isValid(char numString[])
+{
+    int iterator = 0 ;
+    while(numString[iterator] != NULL)
+    {
+        //returns false if any invalid character is found
+        if(isDigit(numString[iterator])== false && isSpace(numString[iterator]) == false)
+        {
+            if(numString[iterator] != '.')
+            {
+                 if (numString[iterator] != '-' && numString[iterator] != '+')
+                {
+                    return false;
+                }
+            }
+           
+        }
+        
+        iterator++;
+    }
+    return true;
+}
+
+//checks to see if a character is a number
+bool isDigit(char c)
+{
+    if(c >= 48 && c <= 57)
+    {
+        return true;
+        
+    }
+    else
+    {
+        return false;
+    }
+    
+}
+
+//checks to see if a charcater is a space
+bool isSpace(char s)
+{
+    if(s == 32)
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+//turns char into an int
+int makeInt(char numString[])
+{
+    int result = 0;
+    
+    for(int i = 0 ;numString[i] != NULL; i++)
+    {
+        result = result*10 + numString[i] - '0';
+    }
+    
+        return result;
+    
 }
