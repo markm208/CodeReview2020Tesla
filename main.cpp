@@ -3,13 +3,13 @@
 
 using namespace std;
 
-void testCharacteristicAndMantissa();
-void shouldConvert(char number[], int expectedCharacteristic, int expectedNumerator, int expectedDenominator);
-void shouldNotConvert(char number[]);
-
+//void testCharacteristicAndMantissa();
+//void shouldConvert(char number[], int expectedCharacteristic, int expectedNumerator, int expectedDenominator);
+//void shouldNotConvert(char number[]);
+//
 void testMath();
-void testAdd();
-void testSubtract();
+//void testAdd();
+//void testSubtract();
 void testMultiply();
 void testDivide();
 
@@ -17,7 +17,7 @@ int main()
 {
     //characteristic and mantissa test
     //testCharacteristicAndMantissa();
-    
+
     //math function tests
     testMath();
 
@@ -133,7 +133,7 @@ int main()
 // void shouldConvert(char number[], int expectedCharacteristic, int expectedNumerator, int expectedDenominator)
 // {
 //     int c, n, d;
-
+//
 //     //if the conversion from C string to integers can take place
 //     if (characteristic(number, c) && mantissa(number, n, d))
 //     {
@@ -145,20 +145,20 @@ int main()
 //         {
 //             cout << "Test failed: '" << number << "' "
 //                 << "was parsed but did not produce the expected results" << endl;
-
+//
 //             if (expectedCharacteristic != c)
 //             {
 //                 cout << "expected characteristic: " << expectedCharacteristic << " "
 //                     << "actual characteristic: " << c << endl;
 //             }
-
+//
 //             if (expectedNumerator != n)
 //             {
 //                 cout << "expected numerator: " << expectedNumerator << " "
 //                     << "actual numerator: " << n << endl;
-
+//
 //             }
-
+//
 //             if (expectedDenominator != d)
 //             {
 //                 cout << "expected denominator: " << expectedDenominator << " "
@@ -176,7 +176,7 @@ int main()
 // void shouldNotConvert(char number[])
 // {
 //     int c, n, d;
-
+//
 //     //if the conversion from C string to integers can take place
 //     if (characteristic(number, c) && mantissa(number, n, d))
 //     {
@@ -184,7 +184,7 @@ int main()
 //             << "was parsed when it should NOT have been." << endl;
 //     }
 // }
-//--
+////--
 void testMath()
 {
     //add
@@ -343,39 +343,39 @@ void testMultiply()
 
     //0 * 0 = "0"
     multiply(0, 0, 10, 0, 0, 10, shortArray, SHORT_ARRAY_LENGTH);
-    shouldConvert(shortArray, 0, 0, 10);
+    //shouldConvert(shortArray, 0, 0, 10);
     multiply(0, 0, 10, 0, 0, 10, mediumArray, MEDIUM_ARRAY_LENGTH);
-    shouldConvert(mediumArray, 0, 0, 10);
+    //shouldConvert(mediumArray, 0, 0, 10);
     multiply(0, 0, 10, 0, 0, 10, largeArray, LARGE_ARRAY_LENGTH);
-    shouldConvert(largeArray, 0, 0, 10);
+    //shouldConvert(largeArray, 0, 0, 10);
 
     //3 * 2 = "6"
     multiply(3, 0, 10, 2, 0, 10, shortArray, SHORT_ARRAY_LENGTH);
-    shouldConvert(shortArray, 6, 0, 10);
+    //shouldConvert(shortArray, 6, 0, 10);
     multiply(3, 0, 10, 2, 0, 10, mediumArray, MEDIUM_ARRAY_LENGTH);
-    shouldConvert(mediumArray, 6, 0, 10);
+    //shouldConvert(mediumArray, 6, 0, 10);
     multiply(3, 0, 10, 2, 0, 10, largeArray, LARGE_ARRAY_LENGTH);
-    shouldConvert(largeArray, 6, 0, 10);
+    //shouldConvert(largeArray, 6, 0, 10);
 
     //3 * -1.5 = "-4.5"
     multiply(3, 0, 10, -1, 1, 2, shortArray, SHORT_ARRAY_LENGTH);
-    shouldConvert(shortArray, -4, 5, 10);
+    //shouldConvert(shortArray, -4, 5, 10);
     multiply(3, 0, 10, -1, 1, 2, mediumArray, MEDIUM_ARRAY_LENGTH);
-    shouldConvert(mediumArray, -4, 5, 10);
+    //shouldConvert(mediumArray, -4, 5, 10);
     multiply(3, 0, 10, -1, 1, 2, largeArray, LARGE_ARRAY_LENGTH);
-    shouldConvert(largeArray, -4, 5, 10);
+    //shouldConvert(largeArray, -4, 5, 10);
 
     //1.125 * 1.6R = "1.87"
     multiply(1, 1, 8, 1, 2, 3, shortArray, SHORT_ARRAY_LENGTH);
-    shouldConvert(shortArray, 1, 87, 100);
+    //shouldConvert(shortArray, 1, 87, 100);
 
     //1.125 * 1.6R = "1.875"
     multiply(1, 1, 8, 1, 2, 3, mediumArray, MEDIUM_ARRAY_LENGTH);
-    shouldConvert(mediumArray, 1, 875, 1000);
+    //shouldConvert(mediumArray, 1, 875, 1000);
 
     //1.125 * 1.6R = "1.875"
     multiply(1, 1, 8, 1, 2, 3, largeArray, LARGE_ARRAY_LENGTH);
-    shouldConvert(largeArray, 1, 875, 1000);
+    //shouldConvert(largeArray, 1, 875, 1000);
 }
 //--
 void testDivide()
@@ -403,28 +403,28 @@ void testDivide()
 
     //0 / 1 = "0"
     divide(0, 0, 10, 1, 0, 10, shortArray, SHORT_ARRAY_LENGTH);
-    shouldConvert(shortArray, 0, 0, 10);
+    //shouldConvert(shortArray, 0, 0, 10);
     divide(0, 0, 10, 1, 0, 10, mediumArray, MEDIUM_ARRAY_LENGTH);
-    shouldConvert(mediumArray, 0, 0, 10);
+    //shouldConvert(mediumArray, 0, 0, 10);
     divide(0, 0, 10, 1, 0, 10, largeArray, LARGE_ARRAY_LENGTH);
-    shouldConvert(largeArray, 0, 0, 10);
+    //shouldConvert(largeArray, 0, 0, 10);
 
     //6 / 3 = "2"
     divide(6, 0, 10, 3, 0, 10, shortArray, SHORT_ARRAY_LENGTH);
-    shouldConvert(shortArray, 2, 0, 10);
+    //shouldConvert(shortArray, 2, 0, 10);
     divide(6, 0, 10, 3, 0, 10, mediumArray, MEDIUM_ARRAY_LENGTH);
-    shouldConvert(mediumArray, 2, 0, 10);
+    //shouldConvert(mediumArray, 2, 0, 10);
     divide(6, 0, 10, 3, 0, 10, largeArray, LARGE_ARRAY_LENGTH);
-    shouldConvert(largeArray, 2, 0, 10);
+    //shouldConvert(largeArray, 2, 0, 10);
 
     //1 / -1.5 = "-.66"
     divide(1, 0, 10, -1, 1, 2, shortArray, SHORT_ARRAY_LENGTH);
-    shouldConvert(shortArray, 0, -66, 100);
-    
+    //shouldConvert(shortArray, 0, -66, 100);
+
     //1 / -1.5 = "-.6666666"
     divide(1, 0, 10, -1, 1, 2, mediumArray, MEDIUM_ARRAY_LENGTH);
-    shouldConvert(mediumArray, 0, -6666666, 10000000);
-    
+    //shouldConvert(mediumArray, 0, -6666666, 10000000);
+
     //1 / -1.5 = "-.66666666666666666"
     divide(1, 0, 10, -1, 1, 2, largeArray, LARGE_ARRAY_LENGTH);
     char expectedResult1[] = "-.66666666666666666";
@@ -441,13 +441,13 @@ void testDivide()
 
     //1.125 / 1.6R = "0.67"
     divide(1, 1, 8, 1, 2, 3, shortArray, SHORT_ARRAY_LENGTH);
-    shouldConvert(shortArray, 0, 67, 100);
+    //shouldConvert(shortArray, 0, 67, 100);
 
     //1.125 / 1.6R = "0.675"
     divide(1, 1, 8, 1, 2, 3, mediumArray, MEDIUM_ARRAY_LENGTH);
-    shouldConvert(mediumArray, 0, 675, 1000);
+    //shouldConvert(mediumArray, 0, 675, 1000);
 
     //1.125 / 1.6R = "0.675"
     divide(1, 1, 8, 1, 2, 3, largeArray, LARGE_ARRAY_LENGTH);
-    shouldConvert(largeArray, 0, 675, 1000);
+    //shouldConvert(largeArray, 0, 675, 1000);
 }
