@@ -15,7 +15,6 @@ using namespace std;
 
 //creates improper fraction and returns numerator
 long long improperFractionNumerator (int c1, int n1, int d1) {
-//    long long temp = 0;
     long long temp = (long long)(c1) * (long long) (d1);
     if(temp < 0) {
         temp = temp - n1;
