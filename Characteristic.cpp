@@ -87,6 +87,14 @@ bool Characteristic::isNumValid(char numString[])
 			{
 				continue;
 			}
+<<<<<<< Updated upstream
+=======
+			// otherwise, a space
+			else if (numString[i] == " ")
+			{
+				continue:
+			}
+>>>>>>> Stashed changes
 			// otherwise the character must be invalid
 			else
 			{
@@ -108,6 +116,10 @@ bool Characteristic::isNumValid(char numString[])
 	return isValid;
 }
 
+<<<<<<< Updated upstream
+=======
+// checks if the string has any number before the decimal
+>>>>>>> Stashed changes
 bool Characteristic::hasCharacteristic(char numString[])
 {
 	bool exists = false;
@@ -127,6 +139,10 @@ bool Characteristic::hasCharacteristic(char numString[])
 	return exists;
 }
 
+<<<<<<< Updated upstream
+=======
+// checks if the string's first character is a hyphen
+>>>>>>> Stashed changes
 bool Characteristic::isNegative(char numString[])
 {
 	bool isNeg = false;
@@ -139,6 +155,10 @@ bool Characteristic::isNegative(char numString[])
 	return isNeg;
 }
 
+<<<<<<< Updated upstream
+=======
+// checks if a given character exists in the string
+>>>>>>> Stashed changes
 bool Characteristic::findIn(char numString[], char c)
 {
 	bool exists = false;
@@ -156,6 +176,11 @@ bool Characteristic::findIn(char numString[], char c)
 	return exists;
 }
 
+<<<<<<< Updated upstream
+=======
+// helper function to find the first index of a given character
+// useful to find a decimal point.
+>>>>>>> Stashed changes
 int Characteristic::findFirstIndexOf(char numString[], char c)
 {
 	int result = -1;
@@ -173,6 +198,10 @@ int Characteristic::findFirstIndexOf(char numString[], char c)
 	return result;
 }
 
+<<<<<<< Updated upstream
+=======
+// basic exponent helper function
+>>>>>>> Stashed changes
 int Characteristic::pow(int base, int power)
 {
 	int result = base;
