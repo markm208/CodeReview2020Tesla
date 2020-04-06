@@ -1,11 +1,44 @@
 #include <iostream>
+#include <climits>
 #include "MultiplyDivide.h"
 
 using namespace std;
-
 bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 {
 	bool retVal = false;
+
+	//if either characteristic contains more digits than length return false
+	if (countDigits(c1) > len - 1 || countDigits(c2) > len - 1)
+		return false;
+	//if either characteristic equals zero set result to zero
+	if (c1 == 0 || c2 == 0)
+	{
+		result[0] = '0';
+		result[1] = '\0';
+		return true;
+	}
+	//test if either given characteristic is negative
+	int i = 0;
+	if (c1 < 0 || c2 < 0)
+	{
+		if (c1 < 0 && c2 < 0)
+		{
+			c1 *= -1;
+			c2 *= -1;
+		}
+		else if (c1 < 0)
+		{
+			result[i] = '-';
+			c1 *= -1;
+			i++;
+		}
+		else
+		{
+			result[i] = '-';
+			c2 *= -1;
+			i++;
+		}
+	}
 
 	int num1 = (c1 * d1) + n1; //calculates numerator 1
 	int num2 = (c2 * d2) + n2; //calculates numerator 2
@@ -15,31 +48,44 @@ bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 	int finalCharacteristic = (num3 / finalDenominator); //calculates the resulting characteristic
 	int finalMantissa = (num3 - (finalCharacteristic * finalDenominator)); //calculates the resulting mantissa
 
-	int i = 0;
-
 	/*takes each digit from finalCharacteristic
 	converts it to a char
 	adds it to the result array*/
-	int temp = finalCharacteristic;
-	while (i < len && temp > 0)
+	int temp = finalCharacteristic; //finalCharacteristic will be needed later
+	int startOfChar = i; //i won't necessarily be zero if there was a negative
+	while (i < len - 1 && temp > 0)
 	{
 		int digit = temp % 10; //get digit
-		char charDigit = (char)(digit + '0'); //convert to char
+		char charDigit = digit + '0'; //convert to char
 		result[i] = charDigit;
-		i++; 
+		i++;
 		temp /= 10; //remove current digit
 	}
 
-	reverseCharArr(result, 0, i - 1); //digits were pushed to back of array so result must be reversed
+	reverseCharArr(result, startOfChar, i - 1); //digits were pushed to back of array so result must be reversed
 	retVal = checkEqual(result, finalCharacteristic, i); //check if at least the characteristic was stored in result
-	result[i] = '.'; //and decimal point
+
+	//test if there is only 1 space left in array
+	if (i == len - 1)
+	{
+		result[i] = '\0';
+		return retVal;
+	}
+	//test if there would only be a 0 after decimal point
+	if (finalMantissa == 0)
+	{
+		result[i] = '\0';
+		return retVal;
+	}
+
+	result[i] = '.'; //add decimal point
 	i++;
 	int startOfNum = i; //preverses current value of i to be used later
 
 	/*takes each digit from finalNumerator
 	converts it to a char
 	adds it to result array*/
-	while (i < len && finalMantissa > 0)
+	while (i < len - 1 && finalMantissa > 0)
 	{
 		int digit = finalMantissa % 10; //get digit
 		char charDigit = (char)(digit + '0'); //convert to char
@@ -49,48 +95,100 @@ bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 	}
 
 	reverseCharArr(result, startOfNum, i - 1); //reverses the values in result after the '.'
-	result[i] = '/0';
-	
+	result[i] = '\0';
+
 	return retVal;
 }
-
+//--
 bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 {
 	bool retVal = false;
+
+	//if either characteristic contains more digits than length return false
+	if (countDigits(c1) > len - 1 || countDigits(c2) > len - 1)
+		return false;
+	//test if either given characteristic is negative
+	int i = 0;
+	if (c1 < 0 || c2 < 0)
+	{
+		if (c1 < 0 && c2 < 0)
+		{
+			c1 *= -1;
+			c2 *= -1;
+		}
+		else if (c1 < 0)
+		{
+			result[i] = '-';
+			c1 *= -1;
+			i++;
+		}
+		else
+		{
+			result[i] = '-';
+			c2 *= -1;
+			i++;
+		}
+	}
 
 	int num1 = (c1 * d1) + n1; //calculates numerator 1
 	int num2 = (c2 * d2) + n2; //calculates numerator 2
 	int improperNum = num1 * d2; //cross multiply for numerator
 	int improperDen = d1 * num2; //cross multiply for denominator
 
-	int finalCharacteristic = improperNum / improperDen; //get final characteristic
-	int finalMantissa = ((improperNum % improperDen) * 10000 / improperDen); //get final mantissa
+	//test for divide by 0
+	if (improperDen == 0)
+	{
+		return false;
+	}
+	//test if numerator equals 0 and set result to 0 if true
+	if (improperNum == 0)
+	{
+		result[0] == '0';
+		result[1] == '\0';
+		return true;
+	}
 
-	int i = 0;
+	int finalCharacteristic = improperNum / improperDen; //get final characteristic
+	int finalMantissa = ((improperNum % improperDen) * 1000 / improperDen); //get final mantissa
 
 	/*takes each digit from finalCharacteristic
 	converts it to a char
 	adds it to the result array*/
-	int temp = finalCharacteristic;
-	while (i < len && temp > 0)
+	int temp = finalCharacteristic; //finalCharacteristic will be needed later
+	int startOfChar = i; //i won't necessarily be zero if there was a negative
+	while (i < len - 1 && temp > 0)
 	{
 		int digit = temp % 10; //get digit
-		char charDigit = (char)(digit + '0'); //convert to char
+		char charDigit = digit + '0'; //convert to char
 		result[i] = charDigit;
 		i++;
 		temp /= 10; //remove current digit
 	}
 
-	reverseCharArr(result, 0, i - 1); //digits were pushed to back of array so result must be reversed
+	reverseCharArr(result, startOfChar, i - 1); //digits were pushed to back of array so result must be reversed
 	retVal = checkEqual(result, finalCharacteristic, i); //check if at least the characteristic was stored in result
-	result[i] = '.'; //and decimal point
+
+	//test if there is only 1 space left in array
+	if (i == len - 1)
+	{
+		result[i] = '\0';
+		return retVal;
+	}
+	//test if there would only be a 0 after decimal point
+	if (finalMantissa == 0)
+	{
+		result[i] = '\0';
+		return retVal;
+	}
+
+	result[i] = '.'; //add decimal point
 	i++;
 	int startOfNum = i; //preverses current value of i to be used later
 
 	/*takes each digit from finalNumerator
 	converts it to a char
 	adds it to result array*/
-	while (i < len && finalMantissa > 0)
+	while (i < len - 1 && finalMantissa > 0)
 	{
 		int digit = finalMantissa % 10; //get digit
 		char charDigit = (char)(digit + '0'); //convert to char
@@ -100,14 +198,14 @@ bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int l
 	}
 
 	reverseCharArr(result, startOfNum, i - 1); //reverses the values in result after the '.'
-	result[i] = '/0';
+	result[i] = '\0';
 
 	return retVal;
 }
-
-//reverses a elements in a given character array from given start position to given end position
+//--
 void reverseCharArr(char arr[], int start, int end)
 {
+	//reverses a elements in a given character array from given start position to given end position
 	while (start < end)
 	{
 		char temp = arr[start];
@@ -117,15 +215,27 @@ void reverseCharArr(char arr[], int start, int end)
 		end--;
 	}
 }
-
-//compares each member of a char array is equal to each digit of an int
+//--
 bool checkEqual(char arr[], int n, int len)
 {
-	for (int i = len-1; i >= 0; i--)
+	//compares each member of a char array is equal to each digit of an int
+	for (int i = len - 1; i >= 0; i--)
 	{
 		if (arr[i] != char((n % 10) + '0'))
 			return false;
 		n /= 10;
 	}
 	return true;
+}
+//--
+int countDigits(int n)
+{
+	//counts and returns number of digits in given integer
+	int count = 0;
+	while (n != 0) 
+	{
+		count++;
+		n /= 10;
+	}
+	return count;
 }
