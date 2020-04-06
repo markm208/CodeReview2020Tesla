@@ -14,9 +14,9 @@ using namespace std;
 /*----HELPER FUNCTIONS----*/
 
 //creates improper fraction and returns numerator
-int improperFractionNumerator (int c1, int n1, int d1) {
-    int temp = 0;
-    temp = c1 * d1;
+long long improperFractionNumerator (int c1, int n1, int d1) {
+//    long long temp = 0;
+    long long temp = (long long)(c1) * (long long) (d1);
     if(temp < 0) {
         temp = temp - n1;
         return temp;
@@ -30,7 +30,7 @@ int commonDenom (int d1, int d2) {
         return d1 * d2;
 }
 
-long long moveDecimal(long long numerator, int digitsLeft, int commonDenom) {
+long long moveDecimal(long long numerator, int digitsLeft, long long commonDenom) {
     unsigned long long returnNum = 0;
     long long temp = 1;
     for(int i = 0; i < digitsLeft-1; i++) {
@@ -53,13 +53,13 @@ long long moveDecimal(long long numerator, int digitsLeft, int commonDenom) {
 bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len) {
     bool retVal = false;
     //creates sum of numerators with helper function
-    int num1 = improperFractionNumerator(c1, n1, d1) * d2;
-    int num2 = improperFractionNumerator(c2, n2, d2) * d1;
+    long long num1 = improperFractionNumerator(c1, n1, d1) * d2;
+    long long num2 = improperFractionNumerator(c2, n2, d2) * d1;
     long long numeratorSum = num1 + num2;
     //creates a common denominator with helper function
-    int common_denom = commonDenom(d1, d2);
+    long long common_denom = commonDenom(d1, d2);
     //creates whole number without decimals
-    int wholeNum = int(numeratorSum / common_denom);
+    long long wholeNum = numeratorSum / common_denom;
     long long temp = wholeNum;//holds wholeNum
     int index = 0;
     
@@ -114,13 +114,13 @@ bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 //-----------------------------------------------------------------------------------
 bool subtract(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len) {
     bool returnVal = false;
-    int num1 = improperFractionNumerator(c1, n1, d1) * d2;
-    int num2 = improperFractionNumerator(c2, n2, d2) * d1;
+    long long num1 = improperFractionNumerator(c1, n1, d1) * d2;
+    long long num2 = improperFractionNumerator(c2, n2, d2) * d1;
     long long numeratorDifference = num1 - num2;
     //creates common denominator
-    int common_denom = commonDenom(d1, d2);
+    long long common_denom = commonDenom(d1, d2);
     //creates whole number without decimals
-    int wholeNum = int(numeratorDifference / common_denom);
+    long long wholeNum = numeratorDifference / common_denom;
     long long temp = wholeNum;
     int index = 0;
     

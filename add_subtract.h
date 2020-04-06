@@ -12,7 +12,7 @@
 #include <stdio.h>
 #pragma once
 
-int improperFractionNumerator (int c1, int n1, int d1);
+long long improperFractionNumerator (int c1, int n1, int d1);
 int commonDenom (int d1, int d2);
 long long moveDecimal(long numerator, int digitsLeft, int commonDenom);
 bool add(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len);
