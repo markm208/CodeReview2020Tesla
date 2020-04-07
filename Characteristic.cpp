@@ -1,7 +1,7 @@
 #include "Characteristic.h"
 
 // Stores the characteristic from param numString[] in param c
-bool Characteristic::characteristic(char numString[], int& c)
+bool characteristic(const char numString[], int& c)
 {
 	bool isValid = isNumValid(numString);
 
@@ -50,7 +50,7 @@ bool Characteristic::characteristic(char numString[], int& c)
 	return isValid;
 }
 
-bool Characteristic::isDigit(char ch)
+bool isDigit(char ch)
 {
 	bool isDigit = false;
 
@@ -67,7 +67,7 @@ bool Characteristic::isDigit(char ch)
 // all characters are digits
 // only first character can be either '+' or '-'
 // only one instance of '.'
-bool Characteristic::isNumValid(char numString[])
+bool isNumValid(const char numString[])
 {
 	bool isValid = true;
 	int strSize = getCStringSize(numString);
@@ -89,9 +89,9 @@ bool Characteristic::isNumValid(char numString[])
 			}
 			
 			// otherwise, a space
-			else if (numString[i] == " ")
+			else if (numString[i] == ' ')
 			{
-				continue:
+				continue;
 			}
 			
 			// otherwise the character must be invalid
@@ -116,7 +116,7 @@ bool Characteristic::isNumValid(char numString[])
 }
 
 // checks if the string has any number before the decimal
-bool Characteristic::hasCharacteristic(char numString[])
+bool hasCharacteristic(const char numString[])
 {
 	bool exists = false;
 	int size = getCStringSize(numString);
@@ -136,7 +136,7 @@ bool Characteristic::hasCharacteristic(char numString[])
 }
 
 // checks if the string's first character is a hyphen
-bool Characteristic::isNegative(char numString[])
+bool isNegative(const char numString[])
 {
 	bool isNeg = false;
 
@@ -149,7 +149,7 @@ bool Characteristic::isNegative(char numString[])
 }
 
 // checks if a given character exists in the string
-bool Characteristic::findIn(char numString[], char c)
+bool findIn(const char numString[], char c)
 {
 	bool exists = false;
 	int size = getCStringSize(numString);
@@ -168,7 +168,7 @@ bool Characteristic::findIn(char numString[], char c)
 
 // helper function to find the first index of a given character
 // useful to find a decimal point.
-int Characteristic::findFirstIndexOf(char numString[], char c)
+int findFirstIndexOf(const char numString[], char c)
 {
 	int result = -1;
 	int size = getCStringSize(numString);
@@ -186,7 +186,7 @@ int Characteristic::findFirstIndexOf(char numString[], char c)
 }
 
 // basic exponent helper function
-int Characteristic::pow(int base, int power)
+int pow(int base, int power)
 {
 	int result = base;
 
@@ -205,9 +205,9 @@ int Characteristic::pow(int base, int power)
 	return result;
 }
 
-int Characteristic::getCStringSize(char numString[])
+int getCStringSize(const char numString[])
 {
-	char* copy = nullptr; // copy of the original string
+	const char* copy = nullptr; // copy of the original string
 
 	for (copy = numString; *copy != '\0'; copy++)// continue the pointer until we reach the null terminator
 	{
