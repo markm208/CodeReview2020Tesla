@@ -11,4 +11,7 @@ bool isValid(char numString[]);
 bool isDigit(char c);
 bool isSpace(char s);
 int makeInt(char numString[]);
+bool isNegative(char numString[],int decPos);
+bool hasDigits(char numString[]);
+
 
