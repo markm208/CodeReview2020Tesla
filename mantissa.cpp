@@ -10,14 +10,14 @@ bool mantissa(char numString[], int& numerator, int& denominator)
     int length = 0 ;
     bool hasDecimal = false;
     int decimalPos = NULL;
-    denominator = 10;
+    denominator = 1;
     numerator = 0;
     
-    if(isValid(numString) == false)
+    if(isValid(numString) == false ||hasDigits(numString)==false)
     {
         return false;
     }
-    
+   
     
     //calculating the length of numString and position of decimal if there is one
     while(numString[length] != NULL)
@@ -30,11 +30,11 @@ bool mantissa(char numString[], int& numerator, int& denominator)
             
         length++;
     }
-   
     //if there is no decimal point in the string then numerator = 0 and denominator = 10
     if(hasDecimal == false)
     {
-      return true;
+        denominator = 10;
+        return true;
     }
     
     char nums[0];//array for all numbers after decimal point
@@ -50,14 +50,44 @@ bool mantissa(char numString[], int& numerator, int& denominator)
         }
     }
     
-    //calculates denominator based on the number of digits after the decimal
-    for (int i = 0;i < iterator - 1; i++)
+    //turns nums[] into an int
+    
+    numerator = makeInt(nums);
+    
+    
+    int numeratorCopy = numerator;
+    int numeratorLength = 1;
+    if (numerator > 0)
     {
-        denominator = denominator * 10;
+        // we count how many times it can be divided by 10:
+        // (how many times we can cut off the last digit until we end up with 0)
+        for ( numeratorLength = 0; numeratorCopy > 0; numeratorLength++)
+        {
+            numeratorCopy = numeratorCopy / 10;
+        }
     }
     
-    //turns nums[] into an int
-    numerator = makeInt(nums);
+    //calculates denominator based on the number of digits after the decimal
+    if(nums[0] == '0' && numeratorLength > 0)
+    {
+        for(int i = 0;i < iterator; i++)
+        {
+            denominator = denominator * 10;
+        }
+    }
+    else
+    {
+        for(int i = 0 ;i < numeratorLength; i++)
+        {
+            denominator = denominator * 10;
+        }
+        
+    }
+    
+    if(isNegative(numString,decimalPos))
+    {
+        numerator = numerator * -1;
+    }
     
 
     return true;
@@ -67,8 +97,9 @@ bool mantissa(char numString[], int& numerator, int& denominator)
 //Helper functions
 
 //checks if passed in numstring is valid entry
-bool isValid(char numString[])
+bool isValid( char numString[])
 {
+    
     int iterator = 0 ;
     while(numString[iterator] != NULL)
     {
@@ -119,15 +150,65 @@ bool isSpace(char s)
 }
 
 //turns char into an int
-int makeInt(char numString[])
+int makeInt( char numString[])
 {
     int result = 0;
     
+    
     for(int i = 0 ;numString[i] != NULL; i++)
     {
-        result = result*10 + numString[i] - '0';
+        if(numString[i] != '0' && isDigit(numString[i]))
+        {
+            result = result*10 + numString[i] - '0';
+        }
+        else
+        {
+            result = result + 0;
+        }
     }
     
         return result;
+    
+}
+
+//checks to see if a character is a number
+bool isNegative( char numString[],int decPos)
+{
+   
+     for(int i = 0 ;numString[i] != NULL; i++)
+     {
+        if(numString[i]== '-')
+        {
+           if(numString[i + 1] == '0'& numString[i + 2] == '.')
+           {
+               return true;
+
+           }
+            else if( numString[i + 1] == '.')
+            {
+                 return true;
+            }
+        }
+     }
+    
+ 
+    
+    return false;
+    
+}
+
+//checks to se if numstring has numbers in it
+bool hasDigits(char numString[])
+{
+     for(int i = 0 ;numString[i] != NULL; i++)
+     {
+         if(numString[i]  >= 48 && numString[i]  <= 57)
+         {
+             return true;
+         }
+     }
+   
+        return false;
+    
     
 }
