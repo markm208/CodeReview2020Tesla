@@ -1,14 +1,14 @@
 #include <iostream>
-#include "mantissa.h"
 #include <climits>
-#include"add_subtract.h"
-
+#include "add_subtract.h"
+#include "mantissa.h"
+#include "Characteristic.h"
 
 using namespace std;
 
 void testCharacteristicAndMantissa();
-void shouldConvert(char number[], int expectedCharacteristic, int expectedNumerator, int expectedDenominator);
-void shouldNotConvert(char number[]);
+void shouldConvert(const char number[], int expectedCharacteristic, int expectedNumerator, int expectedDenominator);
+void shouldNotConvert(const char number[]);
 
 void testMath();
 void testAdd();
@@ -18,7 +18,6 @@ void testDivide();
 
 int main()
 {
-
     //characteristic and mantissa test
     testCharacteristicAndMantissa();
     
@@ -134,12 +133,12 @@ void testCharacteristicAndMantissa()
     shouldNotConvert("-cat");
 }
 //--
-void shouldConvert(char number[], int expectedCharacteristic, int expectedNumerator, int expectedDenominator)
+void shouldConvert(const char number[], int expectedCharacteristic, int expectedNumerator, int expectedDenominator)
 {
     int c, n, d;
 
     //if the conversion from C string to integers can take place
-    if (/*characteristic(number, c) && */mantissa(number, n, d))
+    if (characteristic(number, c) && mantissa(number, n, d))
     {
         if (c == expectedCharacteristic && n == expectedNumerator && d == expectedDenominator)
         {
@@ -177,18 +176,17 @@ void shouldConvert(char number[], int expectedCharacteristic, int expectedNumera
     }
 }
 //--
-void shouldNotConvert(char number[])
+void shouldNotConvert(const char number[])
 {
     int c, n, d;
 
     //if the conversion from C string to integers can take place
-    if (/*characteristic(number, c) &&*/ mantissa(number, n, d))
+    if (characteristic(number, c) && mantissa(number, n, d))
     {
         cout << "Test failed: '" << number << "' "
             << "was parsed when it should NOT have been." << endl;
     }
 }
-
 //--
 void testMath()
 {
@@ -456,4 +454,3 @@ void testDivide()
     divide(1, 1, 8, 1, 2, 3, largeArray, LARGE_ARRAY_LENGTH);
     shouldConvert(largeArray, 0, 675, 1000);*/
 }
-
