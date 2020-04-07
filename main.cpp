@@ -17,7 +17,7 @@ void testMultiply();
 void testDivide();
 
 int main()
-{   
+{
     //characteristic and mantissa test
     testCharacteristicAndMantissa();
     
