@@ -1,13 +1,14 @@
 #include <iostream>
 #include <climits>
 #include "add_subtract.h"
+#include "mantissa.h"
 #include "Characteristic.h"
 
 using namespace std;
 
 void testCharacteristicAndMantissa();
 void shouldConvert(const char number[], int expectedCharacteristic, int expectedNumerator, int expectedDenominator);
-void shouldNotConvert(char number[]);
+void shouldNotConvert(const char number[]);
 
 void testMath();
 void testAdd();
@@ -132,7 +133,7 @@ void testCharacteristicAndMantissa()
     shouldNotConvert("-cat");
 }
 //--
-void shouldConvert(char number[], int expectedCharacteristic, int expectedNumerator, int expectedDenominator)
+void shouldConvert(const char number[], int expectedCharacteristic, int expectedNumerator, int expectedDenominator)
 {
     int c, n, d;
 
@@ -175,7 +176,7 @@ void shouldConvert(char number[], int expectedCharacteristic, int expectedNumera
     }
 }
 //--
-void shouldNotConvert(char number[])
+void shouldNotConvert(const char number[])
 {
     int c, n, d;
 
