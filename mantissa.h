@@ -7,11 +7,11 @@
 //
 #define mantissa_h
 bool mantissa(const char numString[], int& numerator, int& denominator);
-bool isValid(char numString[]);
+bool isValid(const char numString[]);
 bool isDigit(char c);
 bool isSpace(char s);
-int makeInt(char numString[]);
-bool isNegative(char numString[],int decPos);
-bool hasDigits(char numString[]);
+int makeInt(const char numString[]);
+bool isNegative(const char numString[],int decPos);
+bool hasDigits(const char numString[]);
 
 

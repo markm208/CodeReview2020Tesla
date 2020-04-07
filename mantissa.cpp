@@ -5,7 +5,7 @@
 using namespace std;
 //bool mantissa(char numString[], int& numerator, int& denominator);
 
-bool mantissa(char numString[], int& numerator, int& denominator)
+bool mantissa(const char numString[], int& numerator, int& denominator)
 {
     int length = 0 ;
     bool hasDecimal = false;
@@ -97,7 +97,7 @@ bool mantissa(char numString[], int& numerator, int& denominator)
 //Helper functions
 
 //checks if passed in numstring is valid entry
-bool isValid( char numString[])
+bool isValid(const char numString[])
 {
     
     int iterator = 0 ;
@@ -122,7 +122,9 @@ bool isValid( char numString[])
 }
 
 //checks to see if a character is a number
-bool isDigit(char c)
+//mahoney recommends removing one of the isDigit functions as it is
+//used in both caracteristic and mantissa and created a duplicate symbol error
+/*bool isDigit(char c)
 {
     if(c >= 48 && c <= 57)
     {
@@ -134,7 +136,7 @@ bool isDigit(char c)
         return false;
     }
     
-}
+}*/
 
 //checks to see if a charcater is a space
 bool isSpace(char s)
@@ -150,7 +152,7 @@ bool isSpace(char s)
 }
 
 //turns char into an int
-int makeInt( char numString[])
+int makeInt(const char numString[])
 {
     int result = 0;
     
@@ -172,7 +174,7 @@ int makeInt( char numString[])
 }
 
 //checks to see if a character is a number
-bool isNegative( char numString[],int decPos)
+bool isNegative(const char numString[],int decPos)
 {
    
      for(int i = 0 ;numString[i] != NULL; i++)
@@ -198,7 +200,7 @@ bool isNegative( char numString[],int decPos)
 }
 
 //checks to se if numstring has numbers in it
-bool hasDigits(char numString[])
+bool hasDigits(const char numString[])
 {
      for(int i = 0 ;numString[i] != NULL; i++)
      {
