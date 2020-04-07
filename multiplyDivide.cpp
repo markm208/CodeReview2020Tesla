@@ -1,5 +1,4 @@
 #include <iostream>
-#include <climits>
 #include "MultiplyDivide.h"
 
 using namespace std;
@@ -42,16 +41,26 @@ bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 
 	int num1 = (c1 * d1) + n1; //calculates numerator 1
 	int num2 = (c2 * d2) + n2; //calculates numerator 2
-	int num3 = num1 * num2; //calculates the result numerator
 
-	int finalDenominator = d1 * d2; //calculates the resulting denominator of the mantissa
-	int finalCharacteristic = (num3 / finalDenominator); //calculates the resulting characteristic
-	int finalMantissa = (num3 - (finalCharacteristic * finalDenominator)); //calculates the resulting mantissa
+	int improperNum = num1 * num2; //calculates the result numerator
+	int improperDen = d1 * d2; //calculates the resulting denominator of the mantissa
+
+	//test if numerator equals 0 and set result to 0 if true
+	if (improperNum == 0)
+	{
+		result[0] == '0';
+		result[1] == '\0';
+		return true;
+	}
+
+	long long finalCharacteristic = improperNum / improperDen; //get final characteristic
+	long long tenPowLen = pow((long long)10, len - 3 - countDigits(finalCharacteristic));
+	long long finalMantissa = ((long long)(improperNum % improperDen) * tenPowLen / improperDen); //get final mantissa
 
 	/*takes each digit from finalCharacteristic
 	converts it to a char
 	adds it to the result array*/
-	int temp = finalCharacteristic; //finalCharacteristic will be needed later
+	long long temp = finalCharacteristic; //finalCharacteristic will be needed later
 	int startOfChar = i; //i won't necessarily be zero if there was a negative
 	while (i < len - 1 && temp > 0)
 	{
@@ -99,7 +108,7 @@ bool multiply(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int
 
 	return retVal;
 }
-//--
+//------------------------------------------------------------------------------------------
 bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int len)
 {
 	bool retVal = false;
@@ -148,13 +157,14 @@ bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int l
 		return true;
 	}
 
-	int finalCharacteristic = improperNum / improperDen; //get final characteristic
-	int finalMantissa = ((improperNum % improperDen) * 1000 / improperDen); //get final mantissa
+	long long finalCharacteristic = improperNum / improperDen; //get final characteristic
+	long long tenPowLen = pow((long long)10, len - 3 - countDigits(finalCharacteristic));
+	long long finalMantissa = ((long long)(improperNum % improperDen) * tenPowLen / improperDen); //get final mantissa
 
 	/*takes each digit from finalCharacteristic
 	converts it to a char
 	adds it to the result array*/
-	int temp = finalCharacteristic; //finalCharacteristic will be needed later
+	long long temp = finalCharacteristic; //finalCharacteristic will be needed later
 	int startOfChar = i; //i won't necessarily be zero if there was a negative
 	while (i < len - 1 && temp > 0)
 	{
@@ -191,7 +201,7 @@ bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int l
 	while (i < len - 1 && finalMantissa > 0)
 	{
 		int digit = finalMantissa % 10; //get digit
-		char charDigit = (char)(digit + '0'); //convert to char
+		char charDigit = digit + '0'; //convert to char
 		result[i] = charDigit;
 		i++;
 		finalMantissa /= 10; //remove current digit
@@ -202,7 +212,7 @@ bool divide(int c1, int n1, int d1, int c2, int n2, int d2, char result[], int l
 
 	return retVal;
 }
-//--
+//------------------------------------------------------------------------------------------
 void reverseCharArr(char arr[], int start, int end)
 {
 	//reverses a elements in a given character array from given start position to given end position
@@ -215,7 +225,7 @@ void reverseCharArr(char arr[], int start, int end)
 		end--;
 	}
 }
-//--
+//------------------------------------------------------------------------------------------
 bool checkEqual(char arr[], int n, int len)
 {
 	//compares each member of a char array is equal to each digit of an int
@@ -227,15 +237,34 @@ bool checkEqual(char arr[], int n, int len)
 	}
 	return true;
 }
-//--
+//------------------------------------------------------------------------------------------
 int countDigits(int n)
 {
 	//counts and returns number of digits in given integer
 	int count = 0;
-	while (n != 0) 
+	while (n != 0)
 	{
 		count++;
 		n /= 10;
 	}
 	return count;
+}
+//------------------------------------------------------------------------------------------
+long long pow(long long n, int p)
+{
+	//raises given number to given power, returns -1 if there is an issue
+	if (p == 0)
+		return 1;
+	else if (p == 1)
+		return n;
+	else
+	{
+		long long origN = n;
+		for (int i = 2; i <= p; i++)
+		{
+			n = n * origN;
+		}
+		return n;
+	}
+	return -1;
 }
