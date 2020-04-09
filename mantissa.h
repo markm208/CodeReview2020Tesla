@@ -12,6 +12,7 @@ bool isValid(const char numString[]);
 bool isSpace(char s);
 int makeInt(const char numString[]);
 bool isNegative(const char numString[],int decPos);
+bool hasDigits(const char numString[]);
 bool onlyZeros(const char numString[]);
 
 
