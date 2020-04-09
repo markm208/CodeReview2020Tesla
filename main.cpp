@@ -55,7 +55,7 @@ void testCharacteristicAndMantissa()
     shouldConvert("   -0.456", 0, -456, 1000);
     shouldConvert("-0.456   ", 0, -456, 1000);
     shouldConvert("   -0.456   ", 0, -456, 1000);
-    shouldConvert("+0.456", 0, -456, 1000);
+    shouldConvert("+0.456", 0, 456, 1000);
     shouldConvert("   +0.456", 0, 456, 1000);
     shouldConvert("+0.456   ", 0, 456, 1000);
     shouldConvert("   +0.456   ", 0, 456, 1000);
