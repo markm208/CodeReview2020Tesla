@@ -1,11 +1,11 @@
 #include <iostream>
 #include <ctype.h>
 #include "mantissa.h"
+#include "Characteristic.h"
 
 using namespace std;
-//bool mantissa(char numString[], int& numerator, int& denominator);
 
-bool mantissa(char numString[], int& numerator, int& denominator)
+bool mantissa(const char numString[], int& numerator, int& denominator)
 {
     int length = 0 ;
     bool hasDecimal = false;
@@ -37,15 +37,16 @@ bool mantissa(char numString[], int& numerator, int& denominator)
         return true;
     }
     
-    char nums[0];//array for all numbers after decimal point
+    char nums[length];//array for all numbers after decimal point
     int iterator = 0;//will hold the length of nums[]
     
     //fills nums[]
-    for (int i = decimalPos; i < length; i++)
+  
+    for (int j = decimalPos; j < length; j++)
     {
-        if(isDigit(numString[i]))
+         if(isDigit(numString[j])==true)
         {
-            nums[iterator] = numString[i];
+            nums[iterator] = numString[j];
             iterator++;
         }
     }
@@ -68,22 +69,29 @@ bool mantissa(char numString[], int& numerator, int& denominator)
     }
     
     //calculates denominator based on the number of digits after the decimal
-    if(nums[0] == '0' && numeratorLength > 0)
+    
+    if (onlyZeros(nums)==true)//if all nubers after decimal are zero then denom = 10
     {
-        for(int i = 0;i < iterator; i++)
-        {
-            denominator = denominator * 10;
-        }
+        denominator = 10;
     }
     else
     {
-        for(int i = 0 ;i < numeratorLength; i++)
+         if(nums[0] == '0' && numeratorLength > 0)
         {
-            denominator = denominator * 10;
+            for(int i = 0;i < iterator; i++)
+            {
+                denominator = denominator * 10;
+            }
         }
-        
+        else
+        {
+            for(int i = 0 ;i < numeratorLength; i++)
+            {
+                denominator = denominator * 10;
+            }
+            
+        }
     }
-    
     if(isNegative(numString,decimalPos))
     {
         numerator = numerator * -1;
@@ -97,7 +105,7 @@ bool mantissa(char numString[], int& numerator, int& denominator)
 //Helper functions
 
 //checks if passed in numstring is valid entry
-bool isValid( char numString[])
+bool isValid( const char numString[])
 {
     
     int iterator = 0 ;
@@ -121,21 +129,6 @@ bool isValid( char numString[])
     return true;
 }
 
-//checks to see if a character is a number
-bool isDigit(char c)
-{
-    if(c >= 48 && c <= 57)
-    {
-        return true;
-        
-    }
-    else
-    {
-        return false;
-    }
-    
-}
-
 //checks to see if a charcater is a space
 bool isSpace(char s)
 {
@@ -150,7 +143,7 @@ bool isSpace(char s)
 }
 
 //turns char into an int
-int makeInt( char numString[])
+int makeInt(const char numString[])
 {
     int result = 0;
     
@@ -172,7 +165,7 @@ int makeInt( char numString[])
 }
 
 //checks to see if a character is a number
-bool isNegative( char numString[],int decPos)
+bool isNegative(const char numString[],int decPos)
 {
    
      for(int i = 0 ;numString[i] != NULL; i++)
@@ -198,7 +191,7 @@ bool isNegative( char numString[],int decPos)
 }
 
 //checks to se if numstring has numbers in it
-bool hasDigits(char numString[])
+bool hasDigits(const char numString[])
 {
      for(int i = 0 ;numString[i] != NULL; i++)
      {
@@ -210,5 +203,18 @@ bool hasDigits(char numString[])
    
         return false;
     
+}
+
+//test to see if all numbers after the decimal are zero
+bool onlyZeros(const char numString[])
+{
+    for(int i = 0; numString[i] != NULL; i++)
+    {
+        if(numString[i] != '0')
+        {
+            return false;
+        }
+    }
     
+    return true;
 }
