@@ -113,9 +113,9 @@ void testCharacteristicAndMantissa()
     shouldConvert("-000123.456", -123, 456, 1000);
     shouldConvert("-123.45600000", -123, 456, 1000);
     shouldConvert("-00000123.45600000", -123, 456, 1000);
-    shouldConvert("+000123.456", -123, 456, 1000);
-    shouldConvert("+123.45600000", -123, 456, 1000);
-    shouldConvert("+00000123.45600000", -123, 456, 1000);
+    shouldConvert("+000123.456", 123, 456, 1000);
+    shouldConvert("+123.45600000", 123, 456, 1000);
+    shouldConvert("+00000123.45600000", 123, 456, 1000);
 
     //significant zeros in mantissa
     shouldConvert("123.00000456", 123, 456, 100000000);

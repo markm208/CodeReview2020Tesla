@@ -105,6 +105,7 @@ bool mantissa(const char numString[], int& numerator, int& denominator)
 //Helper functions
 
 //checks if passed in numstring is valid entry
+
 bool isValid( const char numString[])
 {
     
@@ -128,6 +129,7 @@ bool isValid( const char numString[])
     }
     return true;
 }
+
 
 //checks to see if a charcater is a space
 bool isSpace(char s)
